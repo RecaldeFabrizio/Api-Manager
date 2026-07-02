@@ -1,11 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Panel de Alertas por IP</title>
+
+  <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-    
+  <main class="layout">
+
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Monitor de alertas</p>
+        <h1>Panel de Alertas por IP </h1>
+        <p class="subtitle">
+          Seleccioná un cliente, consultá las alertas y descargá reportes.
+        </p>
+      </div>
+
+      <div class="client-box">
+        <label for="clienteSelect">Cliente</label>
+
+        <select id="clienteSelect"></select>
+
+        <p id="clienteDescripcion" class="client-description">
+          Sin cliente seleccionado.
+        </p>
+      </div>
+    </header>
+
+    <section class="toolbar panel">
+      <div class="button-group">
+        <button id="btnActualizar" class="btn btn-primary" type="button">
+          Actualizar
+        </button>
+
+        <button id="btnAuto" class="btn" type="button">
+          Auto: OFF
+        </button>
+
+        <button id="btnDemo" class="btn" type="button">
+          Alerta de prueba
+        </button>
+      </div>
+
+      <div class="button-group">
+        <button id="btnExportarCSV" class="btn btn-success" type="button">
+          Descargar CSV
+        </button>
+
+        <button id="btnExportarJSON" class="btn" type="button">
+          Descargar JSON
+        </button>
+
+        <button id="btnLimpiar" class="btn btn-danger" type="button">
+          Limpiar historial local
+        </button>
+      </div>
+    </section>
+
+    <section class="cards">
+      <article class="card panel">
+        <span>Total</span>
+        <strong id="contadorTotal">0</strong>
+      </article>
+
+      <article class="card panel danger-card">
+        <span>Caídas</span>
+        <strong id="contadorDown">0</strong>
+      </article>
+
+      <article class="card panel ok-card">
+        <span>Recuperadas</span>
+        <strong id="contadorUp">0</strong>
+      </article>
+
+      <article class="card panel">
+        <span>Hoy</span>
+        <strong id="contadorHoy">0</strong>
+      </article>
+    </section>
+
+    <section class="filters panel">
+      <div class="field">
+        <label for="inputBuscar">Buscar</label>
+        <input
+          id="inputBuscar"
+          type="search"
+          placeholder="Buscar por IP, equipo, cliente o mensaje..."
+        />
+      </div>
+
+      <div class="field">
+        <label for="filtroEstado">Estado</label>
+        <select id="filtroEstado">
+          <option value="TODOS">Todos</option>
+          <option value="DOWN">Caídos</option>
+          <option value="UP">Recuperados</option>
+          <option value="INFO">Info / sin estado</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="filtroDesde">Desde</label>
+        <input id="filtroDesde" type="date" />
+      </div>
+
+      <div class="field">
+        <label for="filtroHasta">Hasta</label>
+        <input id="filtroHasta" type="date" />
+      </div>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="table-header">
+        <div>
+          <h2>Alertas</h2>
+          <p id="ultimaActualizacion">Todavía no se actualizó.</p>
+        </div>
+
+        <p id="estadoPanel" class="status">
+          Listo.
+        </p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Cliente</th>
+              <th>Equipo</th>
+              <th>IP</th>
+              <th>Estado</th>
+              <th>Mensaje</th>
+            </tr>
+          </thead>
+
+          <tbody id="tablaBody">
+            <tr>
+              <td colspan="6" class="empty">
+                No hay alertas para mostrar.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
